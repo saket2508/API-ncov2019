@@ -1,4 +1,4 @@
-from flask import Flask 
+from flask import Flask, jsonify
 from app.scrape import getCurrentData, getPreviousDayData
   
 app = Flask(__name__)
@@ -9,9 +9,9 @@ def home_view():
 
 @app.route("/latest")
 def latest_view():
-        return getCurrentData()
+        return jsonify(data= getCurrentData())
 
 @app.route("/yesterday")
 def yesterday_view():
-        return getPreviousDayData()
+        return jsonify(data= getPreviousDayData())
 
