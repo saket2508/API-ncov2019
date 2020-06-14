@@ -1,9 +1,5 @@
 from bs4 import BeautifulSoup
 import requests
-import json
-
-with open('app\codes.json') as f:
-    data= json.load(f)
 
 url='https://www.worldometers.info/coronavirus/'
 
@@ -104,30 +100,9 @@ def getTableData(rawdata_table):
 
         name= row_data[1].text
 
-        if(name=="USA"):
-            name= "United States"
-        if(name=="UK"):
-            name="United Kingdom"
-        if(name=="UAE"):
-            name="United Arab Emirates"
-        if(name=="S. Korea"):
-            name="South Korea"
         
-        code=""
 
-        for element in data:
-            if name in element["Name"]:
-                code= element["Code"]
-                break
         
-        if(name=="Caribbean Netherlands"):
-            code="NL"
-        
-        if(name=="India"):
-            code="IN"
-        
-        if(name=="Channel Islands"):
-            code= "JE"
 
         total_cases= int(row_data[2].text.replace(',',''))
 
@@ -198,7 +173,6 @@ def getTableData(rawdata_table):
 
         country={
             'id':c_id,
-            'code':code,
             'name':name,
             'total_cases':total_cases,
             'new_cases':new_cases,
