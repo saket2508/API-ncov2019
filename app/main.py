@@ -4,7 +4,7 @@ import requests
 import json
 #from app.scrape import getCurrentData, getPreviousDayData
 
-with open('app\codes.json') as f:
+with open('codes.json') as f:
     data= json.load(f)
 
 url='https://www.worldometers.info/coronavirus/'
