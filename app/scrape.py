@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 import json
 
-with open('codes.json') as f:
+with open('app\codes.json') as f:
     data= json.load(f)
 
 url='https://www.worldometers.info/coronavirus/'
