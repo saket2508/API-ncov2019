@@ -4,9 +4,6 @@ import requests
 import json
 #from app.scrape import getCurrentData, getPreviousDayData
 
-with open('codes.json') as f:
-    data= json.load(f)
-
 url='https://www.worldometers.info/coronavirus/'
 
 source= requests.get(url).text
@@ -114,21 +111,6 @@ def getTableData(rawdata_table):
         if(name=="S. Korea"):
             name="South Korea"
         
-        code=""
-
-        for element in data:
-            if name in element["Name"]:
-                code= element["Code"]
-                break
-        
-        if(name=="Caribbean Netherlands"):
-            code="NL"
-        
-        if(name=="India"):
-            code="IN"
-        
-        if(name=="Channel Islands"):
-            code= "JE"
 
         total_cases= int(row_data[2].text.replace(',',''))
 
@@ -199,7 +181,6 @@ def getTableData(rawdata_table):
 
         country={
             'id':c_id,
-            'code':code,
             'name':name,
             'total_cases':total_cases,
             'new_cases':new_cases,
