@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 import json
 
-with open('app\codes.json') as f:
+with open('codes.json') as f:
     data= json.load(f)
 
 url='https://www.worldometers.info/coronavirus/'
@@ -244,5 +244,5 @@ def getPreviousDayData():
 
     return data_previous_day
 
-
+getCurrentData()
 
