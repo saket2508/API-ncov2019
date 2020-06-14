@@ -10,9 +10,8 @@ def home_view():
 @app.route("/latest")
 def latest_view():
         return getCurrentData()
+        
 @app.route("/yesterday")
 def yesterday_view():
         return getPreviousDayData()
 
-if __name__=="__main__":
-    app.run(debug=True)
