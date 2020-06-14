@@ -1,5 +1,5 @@
 from flask import Flask 
-from scrape import getCurrentData, getPreviousDayData
+from app.scrape import getCurrentData, getPreviousDayData
   
 app = Flask(__name__)
 
@@ -10,7 +10,7 @@ def home_view():
 @app.route("/latest")
 def latest_view():
         return getCurrentData()
-        
+
 @app.route("/yesterday")
 def yesterday_view():
         return getPreviousDayData()
