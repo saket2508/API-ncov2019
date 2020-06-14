@@ -1,5 +1,5 @@
 from flask import Flask, jsonify
-from app.scrape import getCurrentData, getPreviousDayData
+#from app.scrape import getCurrentData, getPreviousDayData
   
 app = Flask(__name__)
 
