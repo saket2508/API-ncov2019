@@ -1,10 +1,6 @@
 from flask import Flask, jsonify
-from bs4 import BeautifulSoup
-import requests
-import json
 from app.scrape import getCurrentData, getPreviousDayData
 
-  
 app = Flask(__name__)
 
 @app.route("/")
