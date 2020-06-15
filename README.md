@@ -4,6 +4,23 @@ An easy to use RESTFUL API that gives real time COVID-19 info. Data is obtained 
 #### Latest data available at(JSON with full data): https://ncov2019api.herokuapp.com/latest
 #### Data from the previous day(JSON with full data): https://ncov2019api.herokuapp.com/yesterday
 
+#### For global figures of COVID-19: https://ncov2019api.herokuapp.com/latest/world
+```
+{
+  "data": {
+    "active_cases": 3444882, 
+    "critical_cases": 54122, 
+    "new_cases": 125, 
+    "new_deaths": 1, 
+    "new_recoveries": 349, 
+    "total_cases": 7984432, 
+    "total_deaths": 435177, 
+    "total_recovered": 4104373
+  }
+}
+```
+
+
 #### For continent-wise data: https://ncov2019api.herokuapp.com/latest/continents
 ```
 {
