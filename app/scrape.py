@@ -19,16 +19,16 @@ def getTableData(rawdata_table):
 
     data_scraped={}
 
-    continents=[]
+    continents={}
     world={}
-    countries=[]
+    countries={}
 
     for row in rows[:6]:
         row_data= row.find_all('td')
 
         c_name= row_data[1].text.strip('\n')
         if(c_name!=''):
-            name= c_name
+            cont_name= c_name
 
         total_cases= int(row_data[2].text.replace(',',''))
 
@@ -55,10 +55,7 @@ def getTableData(rawdata_table):
         
         critical_cases= int(row_data[9].text.replace(',',''))
 
-        code=""
-
         c_data= {
-        'name':name,
         'total_cases':total_cases,
         'new_cases':new_cases,
         'total_deaths':total_deaths,
@@ -66,13 +63,14 @@ def getTableData(rawdata_table):
         'total_recovered':total_recovered,
         'new_recoveries':new_recoveries,
         'active_cases':active_cases,
-        'critical_cases':critical_cases}
-        continents.append(c_data)
+        'critical_cases':critical_cases
+        }
+        continents[cont_name]= c_data
         
-    continents.sort(key=lambda x: x['total_cases'], reverse=True)
+    continents= dict(sorted(continents.items(),key= lambda kv:kv[1]['total_cases'],reverse=True))
 
-    for item in continents:
-        item["id"]= continents.index(item)+1
+    for key in continents.keys():
+        continents[key]["id"]= list(continents.keys()).index(key)+1
 
     data_scraped['continents']= continents
 
@@ -198,8 +196,6 @@ def getTableData(rawdata_table):
 
 
         country={
-            'id':c_id,
-            'name':name,
             'code':code,
             'total_cases':total_cases,
             'new_cases':new_cases,
@@ -216,11 +212,11 @@ def getTableData(rawdata_table):
             'population':population,
             'continent':continent
         }
-        countries.append(country)
-    countries.sort(key=lambda x: x['total_cases'], reverse=True)
+        countries[name]= country
+    countries= dict(sorted(countries.items(),key= lambda kv:kv[1]['total_cases'],reverse=True))
 
-    for item in countries:
-        item["id"]= countries.index(item)+1
+    for key in countries.keys():
+        countries[key]["id"]= list(countries.keys()).index(key)+1
     
     data_scraped['countries']= countries
 
@@ -244,4 +240,3 @@ def getPreviousDayData():
     data_previous_day= getTableData(table)
 
     return data_previous_day
-
