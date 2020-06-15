@@ -1,7 +1,5 @@
 from bs4 import BeautifulSoup
 import requests
-from bs4 import BeautifulSoup
-import requests
 import json
 
 url='https://www.worldometers.info/coronavirus/'
@@ -192,8 +190,9 @@ def getTableData(rawdata_table):
         population= int(population)
 
         continent= row_data[15].text
-
-
+        
+        if(continent=="Australia/Oceania"):
+            continent= "Oceania"
 
         country={
             'code':code,
