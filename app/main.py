@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
-from app.scrape import getCurrentData, getPreviousDayData
+from app.scrape import getCurrentData, getPreviousDayData, searchEntity
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -24,7 +24,7 @@ def latest_view_arg(name):
 @app.route("/latest/<string:name>/<string:entity>",methods=['GET'])
 @cross_origin()
 def latest_view_arg2(name,entity):
-        return jsonify(data= getCurrentData()[name][entity])
+        return jsonify(data= searchEntity(getCurrentData()[name], entity))
 
 @app.route("/yesterday",methods=['GET'])
 @cross_origin()
@@ -39,4 +39,4 @@ def yesterday_view_arg(name):
 @app.route("/yesterday/<string:name>/<string:entity>",methods=['GET'])
 @cross_origin()
 def yesterday_view_arg2(name,entity):
-        return jsonify(data= getPreviousDayData()[name][entity])
+        return jsonify(data= searchEntity(getPreviousDayData()[name], entity))
