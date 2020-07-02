@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
+import datetime
 import json
 
 url='https://www.worldometers.info/coronavirus/'
@@ -231,11 +232,31 @@ def getTableData(rawdata_table):
 
 
 def getCurrentData():
-
+    dates_dict= {'July': 7,'August': 8,'September': 9,'October': 10,'Novemver':11,'December':12, 'January':1,'February':2,'March':3,'April':4,'May':5,'June':6}
     #labels={0:'id',1:'name',2:'total_cases',3:'new_cases',4:'total_deaths',5:'new_deaths',6:'total_recovered',7:'new_recovered',8:'active_cases',9:'critical_cases',10:'cases_pm',11:'deaths_pm',12:'total_tests',13:'tests_pm',14:'population',15:'continent'}
     table= soup.find_all('table',{'id':'main_table_countries_today'})[0]
-    
+
+    last_updated= soup.find_all('div', {'style': 'font-size:13px; color:#999; margin-top:5px; text-align:center'})[0]
+    month= last_updated.text[14:18]
+
+    m=0
+    if(month in dates_dict.keys()):
+        m= dates_dict[month]
+
+    day= int(last_updated.text[19:21])
+
+    year= int(last_updated.text[23:27])
+
+    hour= int(last_updated.text[29:31])
+
+    #minutes= int(last_updated.text[32:34])
+
+    datetime_now= datetime.datetime(year, m, day, hour, int(last_updated.text[32:34]))
+    now = datetime.datetime.utcnow()
+    diff= now- datetime_now    
+
     data_current= getTableData(table)
+    data_current['last_updated']= str(diff)
 
     return data_current
 
@@ -245,3 +266,5 @@ def getPreviousDayData():
     data_previous_day= getTableData(table)
 
     return data_previous_day
+
+getCurrentData()
